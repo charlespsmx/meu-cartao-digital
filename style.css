@@ -86,6 +86,20 @@ h1 {
     transform: rotate(20deg);
     transition: 0.3s;
 }
+.links i {
+    margin-right: 8px; /* Dá um espacinho à direita do ícone */
+    font-size: 1.1rem;  /* Deixa o ícone levemente maior que o texto */
+}
+/* Estilo específico para o botão de WhatsApp */
+.links a.whatsapp {
+    background-color: #25D366; /* Verde oficial do WhatsApp */
+    font-weight: bold;
+}
+
+.links a.whatsapp:hover {
+    background-color: #128C7E; /* Um verde mais escuro ao passar o mouse */
+    transform: scale(1.05);
+}
 /* Estilos para telas de celular (até 480px de largura) */
 @media (max-width: 480px) {
     body {
@@ -104,8 +118,4 @@ h1 {
     h1 {
         font-size: 1.5rem; /* Diminui um pouco o tamanho da fonte do nome */
     }
-}
-.links i {
-    margin-right: 8px; /* Dá um espacinho à direita do ícone */
-    font-size: 1.1rem;  /* Deixa o ícone levemente maior que o texto */
 }
