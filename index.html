@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meu Cartão de Visitas</title>
     <link rel="stylesheet" href="style.css">
+	
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
@@ -34,35 +35,46 @@
     let isDragging = false;
     let offsetX, offsetY;
 
-    card.addEventListener('mousedown', (e) => {
+    function startDragging(e) {
         isDragging = true;
-        
-        // Pega a posição atual do card
         const rect = card.getBoundingClientRect();
+        // Detecta se é toque ou mouse
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
         
-        // Calcula onde o mouse clicou dentro do card
-        offsetX = e.clientX - rect.left;
-        offsetY = e.clientY - rect.top;
-        
-        card.style.transition = 'none'; // Movimento instantâneo
-        card.style.transform = 'none';   // Remove o translate centralizador
-        
-        // Fixa a posição atual para evitar o pulo
+        offsetX = clientX - rect.left;
+        offsetY = clientY - rect.top;
+        card.style.transition = 'none';
+        card.style.transform = 'none';
         card.style.left = rect.left + 'px';
         card.style.top = rect.top + 'px';
-    });
+    }
 
-    document.addEventListener('mousemove', (e) => {
+    function moveDragging(e) {
         if (!isDragging) return;
+        // Evita que a tela suba/desça enquanto você arrasta o card
+        if (e.touches) e.preventDefault(); 
 
-        // Move o card seguindo o mouse
-        card.style.left = (e.clientX - offsetX) + 'px';
-        card.style.top = (e.clientY - offsetY) + 'px';
-    });
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
 
-    document.addEventListener('mouseup', () => {
+        card.style.left = (clientX - offsetX) + 'px';
+        card.style.top = (clientY - offsetY) + 'px';
+    }
+
+    function stopDragging() {
         isDragging = false;
-    });
+    }
+
+    // Eventos de Mouse
+    card.addEventListener('mousedown', startDragging);
+    document.addEventListener('mousemove', moveDragging);
+    document.addEventListener('mouseup', stopDragging);
+
+    // Eventos de Toque (Celular)
+    card.addEventListener('touchstart', startDragging, { passive: false });
+    document.addEventListener('touchmove', moveDragging, { passive: false });
+    document.addEventListener('touchend', stopDragging);
 </script>
 </body>
 </html>
