@@ -6,6 +6,7 @@
     <title>Meu Cartão de Visitas</title>
     <link rel="stylesheet" href="style.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -28,6 +29,40 @@
 </div>
 </div>
     </div>
+<script>
+    const card = document.querySelector('.card');
+    let isDragging = false;
+    let offsetX, offsetY;
 
+    card.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        
+        // Pega a posição atual do card
+        const rect = card.getBoundingClientRect();
+        
+        // Calcula onde o mouse clicou dentro do card
+        offsetX = e.clientX - rect.left;
+        offsetY = e.clientY - rect.top;
+        
+        card.style.transition = 'none'; // Movimento instantâneo
+        card.style.transform = 'none';   // Remove o translate centralizador
+        
+        // Fixa a posição atual para evitar o pulo
+        card.style.left = rect.left + 'px';
+        card.style.top = rect.top + 'px';
+    });
+
+    document.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+
+        // Move o card seguindo o mouse
+        card.style.left = (e.clientX - offsetX) + 'px';
+        card.style.top = (e.clientY - offsetY) + 'px';
+    });
+
+    document.addEventListener('mouseup', () => {
+        isDragging = false;
+    });
+</script>
 </body>
 </html>

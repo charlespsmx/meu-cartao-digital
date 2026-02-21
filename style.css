@@ -3,38 +3,36 @@ body {
 	background-color: #f0f2f5;
 	background: linear-gradient(to right, #72C6EF, #004E8F);
     
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Poppins', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
 }
-body {
-  background: #72C6EF; /* Fallback */
-  background: linear-gradient(to right, #72C6EF, #004E8F);
-  
-  /* Mantém o resto para centralizar o cartão */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
-}
+
 /* O Cartão */
 .card {
-    /* Um branco com 80% de opacidade */
-    background-color: rgba(255, 255, 255, 0.8); 
-    backdrop-filter: blur(10px); /* Deixa o fundo desfocado como vidro */
+    position: absolute; /* ESSENCIAL para o JavaScript mover o card */
+    cursor: grab;       /* Mostra a mãozinha */
     
-    /* Mantenha o restante das regras que já tínhamos... */
+    background-color: rgba(255, 255, 255, 0.8); 
+    backdrop-filter: blur(10px);
     width: 320px;
     padding: 30px;
     border-radius: 20px;
     box-shadow: 0 10px 25px rgba(0,0,0,0.2);
     text-align: center;
+    
+    /* Centralização inicial forçada para position absolute */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
 }
 
+.card:active {
+    cursor: grabbing; /* Mão fechada ao segurar */
+}
 /* A foto de perfil */
 .profile-img {
     width: 100px;
@@ -56,7 +54,16 @@ h1 {
     font-weight: bold;
     margin-bottom: 20px;
 }
+h1 {
+    font-weight: 600; /* Título bem marcante */
+    letter-spacing: -1px; /* Títulos modernos costumam ter letras mais juntinhas */
+}
 
+.title {
+    font-weight: 300; /* O cargo fica com uma letra mais fina e elegante */
+    text-transform: uppercase; /* Deixa tudo em maiúsculo */
+    font-size: 0.9rem;
+}
 /* Estilo dos Links */
 .links a {
     display: block;
